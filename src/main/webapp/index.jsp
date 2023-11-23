@@ -9,11 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Juez Cachimbo</title>
+        <link rel="stylesheet" href="styles/style.css"/>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <%String hola = "Hola mundo";%>
-        <%= hola%>
+        <div class="container">
+            <div class="imageLogin">
+                <h1>Hola</h1>
+            </div>
+            <div class="login">
+                
+            </div>
+        </div>
     </body>
 </html>
