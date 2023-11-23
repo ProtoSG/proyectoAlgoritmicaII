@@ -1,0 +1,63 @@
+Proyecto_Final_AlgoritmicaII
+Atrás: Algorítmica II
+Nombre: Juez Cachimbo
+
+Resumen:
+Uno de los puntos más fuertes en un examen de admisión son las preguntas de
+comprensión de lectura. Es por eso por lo que un grupo de estudiantes de la Facultad de Educación de la Universidad Nacional Mayor de San Marcos tuvo la idea de crear una plataforma para practicar ejercicios de comprensión de lectura al mismo estilo de las plataformas de programación competitiva (Por ejemplo, Hackerrank o Codeforces). El problema es que ellos no tienen habilidades de programación para desarrollar este tipo de plataformas. De esta manera, ellos han solicitado al profesor del curso de Algorítmica II de la Facultad de Ingeniería de Sistemas e Informática que sus alumnos puedan desarrollar esta plataforma ya que ellos confían mucho en sus capacidades.
+
+Clases
+
+Usuario
+  Contiene
+    Profesores
+    Estudiantes
+  Poder hacer login y logout
+
+Estudiante
+  Registrar
+    Nombre de usuario(único entre los usuarios, pueden usarse letras, números y lo símbolos ".", "_", "-")
+    Contraseña(mínimo 6 caracteres)
+    nombres y apellidos (por separado)
+    fecha de nacimiento
+  Seleccionar al Grupo que pertenece de los disponibles
+  Puede buscar un texto que quiera practicar usando palabras claves
+  Puede seleccionar el texto para practicar
+  Puede ver sus propias estadísticas
+  Cantidad te textos leídos
+  Porcentaje de preguntas correctamente respondidas en total
+  Porcentaje promedio de preguntas correctamente respondidas por texto
+  Porcentaje de textos en los que el estudiante falló todas las preguntas
+  Porcentaje de textos en los que el estudiante acertó todas las preguntas
+
+Profesor
+  Registrar
+    Nombre de usuario(único entre los usuarios, pueden usarse letras, números y lo símbolos ".", "_", "-")
+    Contraseña(mínimo 6 caracteres)
+    nombres y apellidos (por separado)
+    fecha de nacimiento
+    Carrera profesional
+  Crear Grupo
+  Crear ejercicio para todos los grupos
+      Id(Generado automáticamente)
+      Texto
+      Pregunta
+      Alternativas
+      Respuesta correcta
+      Razonamiento  
+  Ver Estadísticas generales de su Grupo
+    Cantidad de textos resueltos por todos sus alumnos
+    Porcentaje de preguntas correctamente respondidas por alumnos de su Grupo
+    Porcentaje promedio de preguntas correctamente respondidas por texto por alumnos de su Grupo.
+    Textos más leídos
+    Textos más fáciles de resolver por sus alumno
+    Textos más difíciles de resolver por sus alumnos
+
+Grupo
+  Atributos  
+    Código de grupo
+    Nombre del grupo
+
+Requerimientos
+
+Toda información sobre el Profesor, Grupo y Estudiante debe ser guardada en archivos(pudiendo ser binario o de texto)
