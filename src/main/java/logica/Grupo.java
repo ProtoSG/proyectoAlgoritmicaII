@@ -1,12 +1,26 @@
 package logica;
 
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Grupo {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idGrupo;
     private String codigoGrupo;
     private String nombreGrupo;
+    @OneToMany(mappedBy="grupo")
     private List<Estudiante> listaEstudiantes;
+    @ManyToOne
+    @JoinColumn(name="id_Grupo")
+    private Profesor profesor;
 
     public Grupo() {
     }
@@ -17,7 +31,8 @@ public class Grupo {
         this.nombreGrupo = nombreGrupo;
         this.listaEstudiantes = listaEstudiantes;
     }
-
+    
+    
     public int getIdGrupo() {
         return idGrupo;
     }

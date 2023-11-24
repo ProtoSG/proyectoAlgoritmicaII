@@ -2,28 +2,31 @@ package logica;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Estudiante extends Persona{
-    private int idEstudiante;
+    
+    @OneToMany(mappedBy="estudiante")
     private List<Texto> listaTexto;
+    @OneToOne
     private Usuario usuario;
-
+    
+    @ManyToOne
+    @JoinColumn(name="id_Estudiante")
+    private Grupo grupo;
+    
     public Estudiante() {
     }
 
-    public Estudiante(int idEstudiante, List<Texto> listaTexto, Usuario usuario, String nombre, String apellido, Date fechaNacimiento) {
+    public Estudiante(List<Texto> listaTexto, Usuario usuario, String nombre, String apellido, Date fechaNacimiento) {
         super(nombre, apellido, fechaNacimiento);
-        this.idEstudiante = idEstudiante;
         this.listaTexto = listaTexto;
         this.usuario = usuario;
-    }
-
-    public int getIdEstudiante() {
-        return idEstudiante;
-    }
-
-    public void setIdEstudiante(int idEstudiante) {
-        this.idEstudiante = idEstudiante;
     }
 
     public List<Texto> getListaTexto() {

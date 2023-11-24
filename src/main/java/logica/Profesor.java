@@ -1,32 +1,28 @@
 package logica;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Profesor extends Persona{
-    private int idProfesor;
+
     private String carreraProfesional;
+    @OneToMany(mappedBy="profesor")
     private List<Grupo> listaGrupos;
+    @OneToOne
     private Usuario usuario;
 
     public Profesor() {
     }
 
-    public Profesor(int idProfesor, String carreraProfesional, List<Grupo> listaGrupos, Usuario usuario, String nombre, String apellido, Date fechaNacimiento) {
+    public Profesor(String carreraProfesional, List<Grupo> listaGrupos, Usuario usuario, String nombre, String apellido, Date fechaNacimiento) {
         super(nombre, apellido, fechaNacimiento);
-        this.idProfesor = idProfesor;
         this.carreraProfesional = carreraProfesional;
         this.listaGrupos = listaGrupos;
         this.usuario = usuario;
-    }
-
-    public int getIdProfesor() {
-        return idProfesor;
-    }
-
-    public void setIdProfesor(int idProfesor) {
-        this.idProfesor = idProfesor;
     }
 
     public String getCarreraProfesional() {

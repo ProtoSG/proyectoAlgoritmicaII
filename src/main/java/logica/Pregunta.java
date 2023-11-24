@@ -1,14 +1,28 @@
 package logica;
 
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Pregunta {
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idPregunta;
     private String enunciado;
     private List<String> alternativas;
     private int respuestaCorrecta;
     private String razonamiento;
-
+    
+    @ManyToOne
+    @JoinColumn(name="id_Pregunta")
+    private Texto texto;
+    
     public Pregunta() {
     }
 
