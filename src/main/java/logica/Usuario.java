@@ -1,18 +1,27 @@
 package logica;
 
 public class Usuario {
+    private int idUsuario;
     private String nombreUsuario;
-    private String contraseña;
-    private String nombres;
-    private String apellidos;
-    private String fechaNacimiento;
+    private String contrasena;
+    private String rol;
 
-    public Usuario(String nombreUsuario, String contraseña, String nombres, String apellidos, String fechaNacimiento) {
+    public Usuario() {
+    }
+    
+    public Usuario(int idUsuario, String nombreUsuario, String contrasena, String rol) {
+        this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
-        this.contraseña = contraseña;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.fechaNacimiento = fechaNacimiento;
+        this.contrasena = contrasena;
+        this.rol = rol;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombreUsuario() {
@@ -23,36 +32,20 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getRol() {
+        return rol;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
     
     

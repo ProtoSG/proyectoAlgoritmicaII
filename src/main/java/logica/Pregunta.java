@@ -1,16 +1,31 @@
 package logica;
 
+import java.util.List;
+
 public class Pregunta {
+    private int idPregunta;
     private String enunciado;
-    private String[] alternativas;
+    private List<String> alternativas;
     private int respuestaCorrecta;
     private String razonamiento;
 
-    public Pregunta(String enunciado, String[] alternativas, int respuestaCorrecta, String razonamiento) {
+    public Pregunta() {
+    }
+
+    public Pregunta(int idPregunta, String enunciado, List<String> alternativas, int respuestaCorrecta, String razonamiento) {
+        this.idPregunta = idPregunta;
         this.enunciado = enunciado;
         this.alternativas = alternativas;
         this.respuestaCorrecta = respuestaCorrecta;
         this.razonamiento = razonamiento;
+    }
+
+    public int getIdPregunta() {
+        return idPregunta;
+    }
+
+    public void setIdPregunta(int idPregunta) {
+        this.idPregunta = idPregunta;
     }
 
     public String getEnunciado() {
@@ -21,11 +36,11 @@ public class Pregunta {
         this.enunciado = enunciado;
     }
 
-    public String[] getAlternativas() {
+    public List<String> getAlternativas() {
         return alternativas;
     }
 
-    public void setAlternativas(String[] alternativas) {
+    public void setAlternativas(List<String> alternativas) {
         this.alternativas = alternativas;
     }
 
@@ -44,6 +59,6 @@ public class Pregunta {
     public void setRazonamiento(String razonamiento) {
         this.razonamiento = razonamiento;
     }
-    
+
     
 }

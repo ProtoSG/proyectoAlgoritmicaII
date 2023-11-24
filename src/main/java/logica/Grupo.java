@@ -1,17 +1,29 @@
 package logica;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Grupo {
+    private int idGrupo;
     private String codigoGrupo;
     private String nombreGrupo;
-    private List<Estudiante> estudiantes;
+    private List<Estudiante> listaEstudiantes;
 
-    public Grupo(String codigoGrupo, String nombreGrupo) {
+    public Grupo() {
+    }
+
+    public Grupo(int idGrupo, String codigoGrupo, String nombreGrupo, List<Estudiante> listaEstudiantes) {
+        this.idGrupo = idGrupo;
         this.codigoGrupo = codigoGrupo;
         this.nombreGrupo = nombreGrupo;
-        this.estudiantes = new ArrayList<>();
+        this.listaEstudiantes = listaEstudiantes;
+    }
+
+    public int getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
     }
 
     public String getCodigoGrupo() {
@@ -30,14 +42,13 @@ public class Grupo {
         this.nombreGrupo = nombreGrupo;
     }
 
-    public List<Estudiante> getEstudiantes() {
-        return estudiantes;
+    public List<Estudiante> getListaEstudiantes() {
+        return listaEstudiantes;
     }
 
-    public void setEstudiantes(List<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
+    public void setListaEstudiantes(List<Estudiante> listaEstudiantes) {
+        this.listaEstudiantes = listaEstudiantes;
     }
     
-       
     
 }

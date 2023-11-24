@@ -3,21 +3,25 @@ package logica;
 import java.util.List;
 
 public class Texto {
-    private int id;
+    private int idTexto;
     private String texto;
-    private List<Pregunta> preguntas;
+    private List<Pregunta> listaPreguntas;
 
-    public Texto(String texto, List<Pregunta> preguntas) {
+    public Texto() {
+    }
+
+    public Texto(int idTexto, String texto, List<Pregunta> listaPreguntas) {
+        this.idTexto = idTexto;
         this.texto = texto;
-        this.preguntas = preguntas;
+        this.listaPreguntas = listaPreguntas;
     }
 
-    public int getId() {
-        return id;
+    public int getIdTexto() {
+        return idTexto;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdTexto(int idTexto) {
+        this.idTexto = idTexto;
     }
 
     public String getTexto() {
@@ -28,12 +32,12 @@ public class Texto {
         this.texto = texto;
     }
 
-    public List<Pregunta> getPreguntas() {
-        return preguntas;
+    public List<Pregunta> getListaPreguntas() {
+        return listaPreguntas;
     }
 
-    public void setPreguntas(List<Pregunta> preguntas) {
-        this.preguntas = preguntas;
+    public void setListaPreguntas(List<Pregunta> listaPreguntas) {
+        this.listaPreguntas = listaPreguntas;
     }
     
     
