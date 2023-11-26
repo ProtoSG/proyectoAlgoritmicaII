@@ -3,6 +3,8 @@ package persistencia;
 import java.util.List;
 import logica.Usuario;
 import logica.Estudiante;
+import logica.Grupo;
+import logica.Profesor;
 
 public class ControladoraPersistencia {
     EstudianteJpaController estudianteJPA = new EstudianteJpaController();
@@ -21,7 +23,23 @@ public class ControladoraPersistencia {
        estudianteJPA.create(estudiante);
     }
     
+    public void crearProfesor(Profesor profesor){
+        profesorJPA.create(profesor);
+    }
+    
+    public void crearGrupo(Grupo grupo){
+        grupoJPA.create(grupo);
+    }
+    
     public List<Usuario> getUsuarios(){
         return usuarioJPA.findUsuarioEntities();
+    }
+    
+    public List<Estudiante> getEstudiantes(){
+        return estudianteJPA.findEstudianteEntities();
+    }
+    
+    public List<Grupo> getGrupos(){
+        return grupoJPA.findGrupoEntities();
     }
 }

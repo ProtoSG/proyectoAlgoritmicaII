@@ -1,7 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,47 +15,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Controladora;
-import logica.Usuario;
+import logica.Grupo;
 
 
-@WebServlet(name = "SvLogin", urlPatterns = {"/SvLogin"})
-public class SvLogin extends HttpServlet {
+@WebServlet(name = "SvGrupo", urlPatterns = {"/SvGrupo"})
+public class SvGrupo extends HttpServlet {
     
     Controladora control = new Controladora();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
     }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        List<Grupo> listaGrupos = new ArrayList<Grupo>();
+        listaGrupos = control.getGrupos();
+        
+        HttpSession misession = request.getSession();
+        misession.setAttribute("listaGrupos", listaGrupos);
+        
+        response.sendRedirect("pages/inicioProfesorPage.jsp");
+        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String codigo = request.getParameter("codigo");
         
-        String userName = request.getParameter("userName");
-        String contrasena = request.getParameter("contrasena");
+        control.crearGrupo(name, codigo);
         
-        Usuario usuario = control.comprobarIngreso(userName, contrasena);
-        
-        if(usuario != null){
-            HttpSession misession = request.getSession(true);
-            misession.setAttribute("usuario", userName);
-            String rol = usuario.getRol();
-            if("alumno".equals(rol)){
-                response.sendRedirect("pages/inicioAlumnoPage.jsp");
-            }else if("profesor".equals(rol)){
-                response.sendRedirect("SvGrupo");
-            }
-        }else{
-            response.sendRedirect("index.jsp");
-        }
+        response.sendRedirect("pages/inicioProfesorPage.jsp");
     }
 
     @Override

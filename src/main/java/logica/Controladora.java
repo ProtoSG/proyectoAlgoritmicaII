@@ -25,8 +25,39 @@ public class Controladora {
         controlPersis.crearEstudiante(estudiante);
     }
     
+    public void crearProfesor(Usuario usuario, String nombre, String apellido, Date fechaNacimiento, String carreraProfesional){
+        Profesor profesor = new Profesor();
+        profesor.setUsuario(usuario);
+        profesor.setNombre(nombre);
+        profesor.setApellido(apellido);
+        profesor.setFechaNacimiento(fechaNacimiento);
+        profesor.setCarreraProfesional(carreraProfesional);
+        controlPersis.crearProfesor(profesor);
+    }
     
-    public boolean comprobarIngreso(String userName, String contrasena){
+    public void crearGrupo(String name, String codigo){
+        Grupo grupo = new Grupo();
+        grupo.setNombreGrupo(name);
+        grupo.setCodigoGrupo(codigo);
+        controlPersis.crearGrupo(grupo);
+    }
+    
+    public Usuario comprobarIngreso(String userName, String contrasena){
+                
+        List<Usuario> listUsuario = new ArrayList<Usuario>();
+        listUsuario = controlPersis.getUsuarios();
+        
+        for(Usuario usu:listUsuario){
+            if(usu.getNombreUsuario().equals(userName)){
+                if(usu.getContrasena().equals(contrasena)){
+                    return usu;
+                }
+            }
+        }
+        return null;
+    }
+    
+    public boolean comprobarUsuario(String userName){
         
         boolean ingreso = false;
         
@@ -35,12 +66,40 @@ public class Controladora {
         
         for(Usuario usu:listUsuario){
             if(usu.getNombreUsuario().equals(userName)){
-                if(usu.getContrasena().equals(contrasena))
+
                     ingreso = true;
-                else
+            }else
                     ingreso = false;
-            }
         }
         return ingreso;
+    }
+    
+    public Usuario getUsuario(String userName){
+        List<Usuario> listUsuario = new ArrayList<Usuario>();
+        listUsuario = controlPersis.getUsuarios();
+        
+        for(Usuario usu:listUsuario){
+            if(usu.getNombreUsuario().equals(userName)){
+                    return usu;
+            }
+        }
+        return null;
+    }
+    
+    public Estudiante getEstudiante(int idUsuario) {
+        List<Estudiante> listEstudiante = controlPersis.getEstudiantes();
+
+        for (Estudiante estudiante : listEstudiante) {
+            Usuario usuario = estudiante.getUsuario();
+            if(usuario != null && usuario.getIdUsuario() == idUsuario) {
+                return estudiante;
+            }
+        }
+
+        return null;
+    }
+    
+    public List<Grupo> getGrupos(){
+        return controlPersis.getGrupos();
     }
 }

@@ -4,8 +4,15 @@
     Author     : dgocr
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="logica.Estudiante"%>
+<%@page import="logica.Controladora"%>
+<%@page import="logica.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%Controladora control = new Controladora();%>
 <html>
     <%@include file="../components/header.jsp"%>
     <body class="h-screen bg-[url('../assets/fondo.png')]">
@@ -17,10 +24,17 @@
                 </div>
                 <div class="w-2/3">
                     <div class="">
+                        <% String userName = (String) request.getSession().getAttribute("usuario");
+                           Usuario usuario1 = control.getUsuario(userName);
+                           Estudiante estudiante = control.getEstudiante(usuario1.getIdUsuario());
+                           Date dateParameter = estudiante.getFechaNacimiento();
+                           SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                           String fechaFormateada = sdf.format(dateParameter);
+                        %>
                         <h2 class="text-2xl font-bold"><%=request.getSession().getAttribute("usuario")%></h2>
-                        <p class="text-lg">Nombres: <span class="font-bold">Nombre del alumno</span></p>
-                        <p class="text-lg">Apellidos: <span class="font-bold">Apellidos del alumno</span></p>
-                        <p class="text-lg">Fecha de nacimiento: <span class="font-bold">Fecha de nacimiento</span></p>
+                        <p class="text-lg">Nombres: <span class="font-bold"><%=estudiante.getNombre()%></span></p>
+                        <p class="text-lg">Apellidos: <span class="font-bold"><%=estudiante.getApellido()%></span></p>
+                        <p class="text-lg">Fecha de nacimiento: <span class="font-bold"><%=fechaFormateada%></span></p>
                     </div>
                 </div>
             </div>

@@ -14,8 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import logica.Controladora;
-import logica.Persona_;
+import logica.Persona;
 import logica.Usuario;
 
 /**
@@ -47,7 +48,7 @@ public class SvEstudiante extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String userName = request.getParameter("nombreUsuario");
         String contrasena = request.getParameter("contrasena");
-        String rol = request.getParameter("rol");
+        String alumno = request.getParameter("alumno");
         
         String dateParameter = request.getParameter("date");
         Date date = null;
@@ -62,14 +63,26 @@ public class SvEstudiante extends HttpServlet {
                 e.printStackTrace(); 
             }
         }
-        
         usuario = new Usuario();
         usuario.setNombreUsuario(userName);
         usuario.setContrasena(contrasena);
-        usuario.setRol(rol);
         
-        control.crearUsuario(userName, contrasena, rol);
-        control.crearEstudiante(usuario, name, lastName, date);
+        boolean coincide = false;
+        coincide = control.comprobarUsuario(userName);
+        
+        if(coincide){
+
+        }else{
+            if ("on".equals(alumno)) {
+                usuario.setRol("alumno");
+                control.crearEstudiante(usuario, name, lastName, date);
+            }else{
+                usuario.setRol("profesor");
+                control.crearProfesor(usuario, name, lastName, date, "");
+            }
+        }
+        
+        
         
         response.sendRedirect("index.jsp");
     }

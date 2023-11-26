@@ -62,8 +62,8 @@
                             <label>Password</label>
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="profesor" name="rol" checked onclick="updateCheckboxes(this)"> <label for="profesor">Profesor</label>
-                            <input type="checkbox" id="alumno" name="rol" onclick="updateCheckboxes(this)"> <label for="alumno">Alumno</label>
+                            <input type="checkbox" id="profesor" name="profesor" checked onclick="updateCheckboxes(this)"> <label for="profesor">Profesor</label>
+                            <input type="checkbox" id="alumno" name="alumno" onclick="updateCheckboxes(this)"> <label for="alumno">Alumno</label>
                         </div>
  
                         <button type="submit" class="btn">Register</button>
@@ -71,13 +71,12 @@
                             <p>Already have an account? <a href="#" class="login-link">Login</a></p>
                         </div>
                     </form>
+          
                 </div>
 
             </div>
         </div>
         
         <<script src="scripts/login-register.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>
 </html>
