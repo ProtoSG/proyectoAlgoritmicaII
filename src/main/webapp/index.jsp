@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 23 nov. 2023, 09:42:08
-    Author     : dgocr
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,15 +13,15 @@
             <div class="wrapper">
                 <div class="form-box login">
                     <h2>Welcome !</h2>
-                    <form action="#">
+                    <form class="user" action="SvLogin" method="POST">
                         <div class="input-box">
                             <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                            <input type="text" required>
+                            <input type="text" id="userName" name="userName" required>
                             <label>Username</label>
                         </div>
                         <div class="input-box">
                             <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                            <input type="password" required>
+                            <input type="password" id="contrasena" name="contrasena" required>
                             <label>Password</label>
                         </div>
                         <div class="forgot">
@@ -41,32 +35,37 @@
                 </div>
                 <div class="form-box register">
                     <h2>Registration</h2>
-                    <form action="#">
+                    <form class="user" action="SvEstudiante" method="POST">
                         <div class="input-box">
                             <span class="icon"><ion-icon name="reader-outline"></ion-icon></span>
-                            <input type="text" required>
+                            <input type="text" id="name" name="name" required>
                             <label>Name</label>
                         </div>
                         <div class="input-box">
                             <span class="icon"><ion-icon name="reader-outline"></ion-icon></span>
-                            <input type="text" required>
+                            <input type="text" id="lastName" name="lastName" required>
                             <label>Last Name</label>
                         </div>
 
                         <div class="input-box">
                             <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                            <input type="date" required>
+                            <input type="date" id="date" name="date" required>
                         </div>
                         <div class="input-box">
                             <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                            <input type="text" required>
+                            <input type="text" id="nombreUsuario" name="nombreUsuario" required>
                             <label>Username</label>
                         </div>
                         <div class="input-box">
                             <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                            <input type="password" required>
+                            <input type="password" id="contrasena" name="contrasena" required>
                             <label>Password</label>
                         </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="profesor" name="rol" checked onclick="updateCheckboxes(this)"> <label for="profesor">Profesor</label>
+                            <input type="checkbox" id="alumno" name="rol" onclick="updateCheckboxes(this)"> <label for="alumno">Alumno</label>
+                        </div>
+ 
                         <button type="submit" class="btn">Register</button>
                         <div class="login-register">
                             <p>Already have an account? <a href="#" class="login-link">Login</a></p>

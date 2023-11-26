@@ -14,3 +14,13 @@ registerLink.addEventListener('click', ()=>{
 loginLink.addEventListener('click', ()=>{
     wrapper.classList.remove('active');
 });
+
+function updateCheckboxes(checkbox) {
+    var checkboxes = document.getElementsByName('rol');
+
+    checkboxes.forEach(function (currentCheckbox) {
+        if (currentCheckbox !== checkbox) {
+            currentCheckbox.checked = false;
+        }
+    });
+}

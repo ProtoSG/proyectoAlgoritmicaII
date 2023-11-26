@@ -1,5 +1,6 @@
 package logica;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Grupo {
+public class Grupo implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idGrupo;
@@ -19,7 +20,7 @@ public class Grupo {
     @OneToMany(mappedBy="grupo")
     private List<Estudiante> listaEstudiantes;
     @ManyToOne
-    @JoinColumn(name="id_Grupo")
+    @JoinColumn(name="id_profesor")
     private Profesor profesor;
 
     public Grupo() {

@@ -1,5 +1,6 @@
 package logica;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Pregunta {
+public class Pregunta implements Serializable{
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -20,7 +21,7 @@ public class Pregunta {
     private String razonamiento;
     
     @ManyToOne
-    @JoinColumn(name="id_Pregunta")
+    @JoinColumn(name="id_texto")
     private Texto texto;
     
     public Pregunta() {
@@ -73,6 +74,7 @@ public class Pregunta {
     public void setRazonamiento(String razonamiento) {
         this.razonamiento = razonamiento;
     }
-
+    
+    
     
 }
