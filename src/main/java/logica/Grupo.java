@@ -32,6 +32,15 @@ public class Grupo implements Serializable{
         this.nombreGrupo = nombreGrupo;
         this.listaEstudiantes = listaEstudiantes;
     }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
+    
     
     
     public int getIdGrupo() {

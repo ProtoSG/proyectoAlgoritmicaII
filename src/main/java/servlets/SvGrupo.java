@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Controladora;
 import logica.Grupo;
+import logica.Profesor;
 
 
 @WebServlet(name = "SvGrupo", urlPatterns = {"/SvGrupo"})
@@ -47,8 +48,9 @@ public class SvGrupo extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         String codigo = request.getParameter("codigo");
-        
-        control.crearGrupo(name, codigo);
+        HttpSession misession = request.getSession();
+        control.crearGrupo(name, codigo, misession);
+
         
         response.sendRedirect("pages/inicioProfesorPage.jsp");
     }

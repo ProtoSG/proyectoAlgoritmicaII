@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Controladora;
+import logica.Profesor;
 import logica.Usuario;
 
 
@@ -37,14 +38,21 @@ public class SvLogin extends HttpServlet {
         String contrasena = request.getParameter("contrasena");
         
         Usuario usuario = control.comprobarIngreso(userName, contrasena);
+
         
         if(usuario != null){
+            
+            Profesor profesor = control.getProfesor(usuario.getIdUsuario());
+            
             HttpSession misession = request.getSession(true);
             misession.setAttribute("usuario", userName);
             String rol = usuario.getRol();
             if("alumno".equals(rol)){
+                
                 response.sendRedirect("pages/inicioAlumnoPage.jsp");
             }else if("profesor".equals(rol)){
+                misession.setAttribute("profesor", profesor);
+                System.out.println("profesor: " + misession.getAttribute("profesor"));
                 response.sendRedirect("SvGrupo");
             }
         }else{

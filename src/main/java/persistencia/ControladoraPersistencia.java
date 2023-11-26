@@ -1,6 +1,8 @@
 package persistencia;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logica.Usuario;
 import logica.Estudiante;
 import logica.Grupo;
@@ -39,7 +41,19 @@ public class ControladoraPersistencia {
         return estudianteJPA.findEstudianteEntities();
     }
     
+    public List<Profesor> getProfesores(){
+        return profesorJPA.findProfesorEntities();
+    }
+    
     public List<Grupo> getGrupos(){
         return grupoJPA.findGrupoEntities();
+    }
+    
+    public void editarProfesor(Profesor profesor){
+        try {
+            profesorJPA.edit(profesor);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

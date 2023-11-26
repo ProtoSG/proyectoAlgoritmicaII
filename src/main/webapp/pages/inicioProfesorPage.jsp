@@ -1,4 +1,5 @@
 
+<%@page import="logica.Profesor"%>
 <%@page import="logica.Grupo"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,8 +19,10 @@
                     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                         <%
                             List<Grupo> listaGrupos =(List)request.getSession().getAttribute("listaGrupos");
+                            Profesor profesor = (Profesor)request.getSession().getAttribute("profesor");
+                            List<Grupo> listGroup = profesor.getListaGrupos();
                         %>
-                    <% for(Grupo grupo:listaGrupos){ %>
+                    <% for(Grupo grupo : listGroup){ %>
                         <div class="bg-white overflow-hidden shadow rounded-lg">
                             <div class="px-4 py-5 sm:p-6">
                                 <dl>

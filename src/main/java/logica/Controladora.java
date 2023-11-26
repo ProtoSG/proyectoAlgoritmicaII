@@ -3,6 +3,7 @@ package logica;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import persistencia.ControladoraPersistencia;
 
 public class Controladora {
@@ -35,11 +36,17 @@ public class Controladora {
         controlPersis.crearProfesor(profesor);
     }
     
-    public void crearGrupo(String name, String codigo){
+    public void crearGrupo(String name, String codigo, HttpSession misession ){
         Grupo grupo = new Grupo();
         grupo.setNombreGrupo(name);
         grupo.setCodigoGrupo(codigo);
-        controlPersis.crearGrupo(grupo);
+        
+        Profesor profesor = (Profesor) misession.getAttribute("profesor");
+        profesor.agregarGrupo(grupo);
+        
+        grupo.setProfesor(profesor);
+        
+        controlPersis.editarProfesor(profesor);
     }
     
     public Usuario comprobarIngreso(String userName, String contrasena){
@@ -95,9 +102,22 @@ public class Controladora {
                 return estudiante;
             }
         }
-
         return null;
     }
+    
+    public Profesor getProfesor(int idUsuario) {
+        List<Profesor> listProfesore = controlPersis.getProfesores();
+
+        for (Profesor profesor : listProfesore) {
+            Usuario usuario = profesor.getUsuario();
+            if(usuario != null && usuario.getIdUsuario() == idUsuario) {
+                return profesor;
+            }
+        }
+        return null;
+    }
+    
+    
     
     public List<Grupo> getGrupos(){
         return controlPersis.getGrupos();
