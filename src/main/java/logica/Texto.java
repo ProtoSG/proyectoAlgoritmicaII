@@ -2,6 +2,7 @@ package logica;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class Texto implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTexto;
     private String texto;
-    @OneToMany(mappedBy="texto")
+    @OneToMany(mappedBy="texto", cascade = CascadeType.PERSIST)
     private List<Pregunta> listaPreguntas;
     @ManyToOne
     @JoinColumn(name="id_estudiante")

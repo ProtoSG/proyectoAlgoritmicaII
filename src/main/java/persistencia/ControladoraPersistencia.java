@@ -7,6 +7,7 @@ import logica.Usuario;
 import logica.Estudiante;
 import logica.Grupo;
 import logica.Profesor;
+import logica.Texto;
 
 public class ControladoraPersistencia {
     EstudianteJpaController estudianteJPA = new EstudianteJpaController();
@@ -31,6 +32,10 @@ public class ControladoraPersistencia {
     
     public void crearGrupo(Grupo grupo){
         grupoJPA.create(grupo);
+    }
+    
+    public void crearTexto(Texto texto){
+        textoJPA.create(texto);
     }
     
     public List<Usuario> getUsuarios(){

@@ -2,6 +2,7 @@ package logica;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Pregunta implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idPregunta;
     private String enunciado;
+    @ElementCollection
     private List<String> alternativas;
     private int respuestaCorrecta;
     private String razonamiento;
@@ -35,6 +37,16 @@ public class Pregunta implements Serializable{
         this.razonamiento = razonamiento;
     }
 
+    public Texto getTexto() {
+        return texto;
+    }
+
+    public void setTexto(Texto texto) {
+        this.texto = texto;
+    }
+
+        
+    
     public int getIdPregunta() {
         return idPregunta;
     }

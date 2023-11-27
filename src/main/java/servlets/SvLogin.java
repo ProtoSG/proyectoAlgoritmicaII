@@ -59,7 +59,7 @@ public class SvLogin extends HttpServlet {
                     response.sendRedirect("SvGrupo");
             }else if("profesor".equals(rol)){
                 misession.setAttribute("profesor", profesor);
-                response.sendRedirect("SvGrupo");
+                response.sendRedirect("pages/inicioProfesorPage.jsp");
             }
         }else{
             response.sendRedirect("index.jsp");

@@ -49,6 +49,18 @@ public class Controladora {
         controlPersis.editarProfesor(profesor);
     }
     
+    public void crearTexto(String texto, List<Pregunta> preguntas){
+        Texto newTexto = new Texto();
+        newTexto.setTexto(texto);
+        newTexto.setListaPreguntas(preguntas);
+        
+        for(Pregunta pregunta:preguntas){
+            pregunta.setTexto(newTexto);
+        }
+        
+        controlPersis.crearTexto(newTexto);
+    }
+    
     public boolean comprobarIngreso(String userName, String contrasena){        
         List<Usuario> listUsuario = new ArrayList<Usuario>();
         listUsuario = controlPersis.getUsuarios();
