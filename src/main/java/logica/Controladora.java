@@ -49,19 +49,20 @@ public class Controladora {
         controlPersis.editarProfesor(profesor);
     }
     
-    public Usuario comprobarIngreso(String userName, String contrasena){
-                
+    public boolean comprobarIngreso(String userName, String contrasena){        
         List<Usuario> listUsuario = new ArrayList<Usuario>();
         listUsuario = controlPersis.getUsuarios();
+        
+        boolean ingreso = false;
         
         for(Usuario usu:listUsuario){
             if(usu.getNombreUsuario().equals(userName)){
                 if(usu.getContrasena().equals(contrasena)){
-                    return usu;
+                    ingreso = true;
                 }
             }
         }
-        return null;
+        return ingreso;
     }
     
     public boolean comprobarUsuario(String userName){
@@ -117,9 +118,15 @@ public class Controladora {
         return null;
     }
     
-    
-    
     public List<Grupo> getGrupos(){
         return controlPersis.getGrupos();
+    }
+    
+    public Grupo getGrupo(int grupoId){
+        return controlPersis.getGrupo(grupoId);
+    }
+    
+    public void actualizarEstudiante(Estudiante estudiante){
+        controlPersis.actualizarEstudiante(estudiante);
     }
 }

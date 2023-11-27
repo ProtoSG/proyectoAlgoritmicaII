@@ -37,6 +37,10 @@ public class ControladoraPersistencia {
         return usuarioJPA.findUsuarioEntities();
     }
     
+    public Usuario getUsuario(int id){
+        return usuarioJPA.findUsuario(id);
+    }
+    
     public List<Estudiante> getEstudiantes(){
         return estudianteJPA.findEstudianteEntities();
     }
@@ -45,13 +49,29 @@ public class ControladoraPersistencia {
         return profesorJPA.findProfesorEntities();
     }
     
+    public Profesor getProfesor(int idProfesor){
+        return profesorJPA.findProfesor(idProfesor);
+    }
+    
     public List<Grupo> getGrupos(){
         return grupoJPA.findGrupoEntities();
+    }
+    
+    public Grupo getGrupo(int grupoId){
+        return grupoJPA.findGrupo(grupoId);
     }
     
     public void editarProfesor(Profesor profesor){
         try {
             profesorJPA.edit(profesor);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void actualizarEstudiante(Estudiante estudiante){
+        try {
+            estudianteJPA.edit(estudiante);
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }

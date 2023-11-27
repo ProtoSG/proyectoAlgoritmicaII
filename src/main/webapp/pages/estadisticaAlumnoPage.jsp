@@ -35,6 +35,7 @@
                         <p class="text-lg">Nombres: <span class="font-bold"><%=estudiante.getNombre()%></span></p>
                         <p class="text-lg">Apellidos: <span class="font-bold"><%=estudiante.getApellido()%></span></p>
                         <p class="text-lg">Fecha de nacimiento: <span class="font-bold"><%=fechaFormateada%></span></p>
+                        <p class="text-lg">Grupo: <span class="font-bold"><%=estudiante.getGrupo().getNombreGrupo()%></span></p>
                     </div>
                 </div>
             </div>

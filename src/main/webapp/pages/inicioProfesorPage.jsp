@@ -18,7 +18,6 @@
                 <div class="mt-10">
                     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                         <%
-                            List<Grupo> listaGrupos =(List)request.getSession().getAttribute("listaGrupos");
                             Profesor profesor = (Profesor)request.getSession().getAttribute("profesor");
                             List<Grupo> listGroup = profesor.getListaGrupos();
                         %>

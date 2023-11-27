@@ -6,51 +6,46 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import logica.Controladora;
+import logica.Estudiante;
 import logica.Grupo;
-import logica.Profesor;
 
-
-@WebServlet(name = "SvGrupo", urlPatterns = {"/SvGrupo"})
-public class SvGrupo extends HttpServlet {
+@WebServlet(name = "SvActualizarEstudiante", urlPatterns = {"/SvActualizarEstudiante"})
+public class SvActualizarEstudiante extends HttpServlet {
     
     Controladora control = new Controladora();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
     }
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Grupo> listaGrupos = new ArrayList<Grupo>();
-        listaGrupos = control.getGrupos();
-        
-        HttpSession misession = request.getSession();
-        misession.setAttribute("listaGrupos", listaGrupos);
-        
-        response.sendRedirect("pages/elegirGrupoAlumnoPage.jsp");
-        
+        processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String codigo = request.getParameter("codigo");
-        HttpSession misession = request.getSession();
-        control.crearGrupo(name, codigo, misession);
-        response.sendRedirect("pages/inicioProfesorPage.jsp");
+        
+        int id = Integer.parseInt(request.getParameter("grupoId"));
+        
+        Grupo grupo = control.getGrupo(id);
+        
+        Estudiante estudiante = (Estudiante) request.getSession().getAttribute("estudiante");
+        estudiante.setGrupo(grupo);
+        control.actualizarEstudiante(estudiante);
+        
+        response.sendRedirect("pages/inicioAlumnoPage.jsp");
     }
 
     @Override
