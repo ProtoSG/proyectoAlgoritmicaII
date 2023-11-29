@@ -10,8 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import logica.Controladora;
 import logica.Pregunta;
+import logica.Texto;
 
 
 @WebServlet(name = "SvTexto", urlPatterns = {"/SvTexto"})
@@ -27,18 +29,29 @@ public class SvTexto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        List<Texto> listText = new ArrayList<Texto>();
+        listText = control.getTextos();
+        
+        HttpSession misession = request.getSession();
+        misession.setAttribute("listaTexto", listText);
+        
+        
+     
+            response.sendRedirect("pages/inicioAlumnoPage.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        
         String texto = request.getParameter("texto");
         List<Pregunta> preguntas = obtenerPreguntasDesdeRequest(request);
         
+     
         control.crearTexto(texto, preguntas);
         
-        response.sendRedirect("../pages/inicioProfesorPage.jsp");
+        response.sendRedirect("pages/inicioProfesorPage.jsp");
     }
     
     private List<Pregunta> obtenerPreguntasDesdeRequest(HttpServletRequest request) {
@@ -50,9 +63,35 @@ public class SvTexto extends HttpServlet {
         // Itera sobre las preguntas y sus respuestas
         for (int i = 1; i <= cantidadPreguntas; i++) {
             String enunciado = request.getParameter("question" + i);
-            int respuestaCorrecta = Integer.parseInt(request.getParameter("correctAnswer" + i));
+            
+            String respuestString = request.getParameter("correctAnswer" + i);
+            int respuestaCorrecta;
+            switch (respuestString.toUpperCase()) {
+                case "A":
+                    respuestaCorrecta = 0;
+                    break;
+                case "B":
+                    respuestaCorrecta = 1;
+                    break;
+                case "C":
+                    respuestaCorrecta = 2;
+                    break;
+                case "D":
+                    respuestaCorrecta = 3;
+                    break;
+                case "E":
+                    respuestaCorrecta = 4;
+                    break;
+                case "F":
+                    respuestaCorrecta = 5;
+                    break;
+                default:
+                    respuestaCorrecta = -1;
+                    break;
+            }
+            
             String razonamiento = request.getParameter("reason" + i);
-
+            
             // Asegúrate de ajustar esto según la estructura real de tu formulario
             List<String> alternativas = obtenerAlternativasDesdeRequest(request, i);
 

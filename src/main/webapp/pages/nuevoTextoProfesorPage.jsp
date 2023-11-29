@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <html>
     <%@include file="../components/header.jsp"%>
     <body class="h-screen bg-[url('../assets/fondo.png')]">
         <%@include file="../components/navBarProfesor.jsp"%>
@@ -12,7 +11,7 @@
                     Nuevo Texto
                 </p>
             </div>
-            <form class="user" action="../SvTexto" method="POST">
+            <form  accept-charset="UTF-8" class="user" action="../SvTexto" method="POST">
                 <div class=" mt-10">
                     <label for="texto" class="text-2xl block text-sm font-medium leading-6 text-gray-900">Texto</label>
                     <div class="relative mt-2 rounded-md shadow-sm">

@@ -35,6 +35,7 @@ public class ControladoraPersistencia {
     }
     
     public void crearTexto(Texto texto){
+        System.out.println(texto);
         textoJPA.create(texto);
     }
     
@@ -64,6 +65,14 @@ public class ControladoraPersistencia {
     
     public Grupo getGrupo(int grupoId){
         return grupoJPA.findGrupo(grupoId);
+    }
+    
+    public List<Texto> getTextos(){
+        return textoJPA.findTextoEntities();
+    }
+    
+    public Texto getTexto(int id){
+        return textoJPA.findTexto(id);
     }
     
     public void editarProfesor(Profesor profesor){

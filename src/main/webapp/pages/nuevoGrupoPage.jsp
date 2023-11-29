@@ -1,9 +1,3 @@
-<%-- 
-    Document   : nuevoGrupoPage
-    Created on : 26 nov. 2023, 03:29:25
-    Author     : dgocr
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

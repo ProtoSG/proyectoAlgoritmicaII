@@ -1,8 +1,12 @@
 package logica;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.StringTokenizer;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +20,7 @@ public class Texto implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTexto;
+    @Column(length = 5000)
     private String texto;
     @OneToMany(mappedBy="texto", cascade = CascadeType.PERSIST)
     private List<Pregunta> listaPreguntas;
@@ -31,6 +36,8 @@ public class Texto implements Serializable{
         this.texto = texto;
         this.listaPreguntas = listaPreguntas;
     }
+    
+    
     
     public int getIdTexto() {
         return idTexto;
@@ -56,5 +63,24 @@ public class Texto implements Serializable{
         this.listaPreguntas = listaPreguntas;
     }
     
-    
+    public String limitarPalabras(int limite){
+        List<String> palabras = new ArrayList<>();
+        StringTokenizer tokenizer = new StringTokenizer(texto);
+
+        while(tokenizer.hasMoreTokens()){
+        palabras.add(tokenizer.nextToken());
+        }
+
+        palabras = palabras.subList(0, Math.min(limite, palabras.size()));
+        StringBuilder resultado = new StringBuilder();
+                Iterator<String> iterator = palabras.iterator();
+                while (iterator.hasNext()) {
+                    resultado.append(iterator.next());
+                    if (iterator.hasNext()) {
+                        resultado.append(" ");
+                    }
+                }
+
+        return resultado.toString();
+        }
 }

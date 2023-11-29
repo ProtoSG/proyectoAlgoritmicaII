@@ -58,6 +58,8 @@ public class Controladora {
             pregunta.setTexto(newTexto);
         }
         
+        System.out.println(texto);
+        
         controlPersis.crearTexto(newTexto);
     }
     
@@ -136,6 +138,14 @@ public class Controladora {
     
     public Grupo getGrupo(int grupoId){
         return controlPersis.getGrupo(grupoId);
+    }
+    
+    public List<Texto> getTextos(){
+        return controlPersis.getTextos();
+    }
+    
+    public Texto getTexto(int id){
+        return controlPersis.getTexto(id);
     }
     
     public void actualizarEstudiante(Estudiante estudiante){

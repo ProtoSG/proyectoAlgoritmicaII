@@ -36,6 +36,7 @@ public class TextoJpaController implements Serializable {
     }
     
     public void create(Texto texto) {
+        System.out.println(texto);
         EntityManager em = null;
         try {
             em = getEntityManager();
