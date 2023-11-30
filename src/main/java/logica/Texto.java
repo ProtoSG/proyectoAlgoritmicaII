@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,9 +22,7 @@ public class Texto implements Serializable{
     private String texto;
     @OneToMany(mappedBy="texto", cascade = CascadeType.PERSIST)
     private List<Pregunta> listaPreguntas;
-    @ManyToOne
-    @JoinColumn(name="id_estudiante")
-    private Estudiante estudiante;
+
     
     public Texto() {
     }

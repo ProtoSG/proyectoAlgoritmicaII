@@ -9,6 +9,7 @@
     <class>logica.Texto</class>
     <class>logica.Usuario</class>
     <class>logica.Estudiante</class>
+    <class>logica.TextoLeido</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/juez_cachimbo?serverTimezone=UTC"/>

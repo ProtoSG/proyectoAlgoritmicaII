@@ -10,7 +10,7 @@
         <%@include file="../components/navBar.jsp"%>
         <div class="flex items-center">
             <div class="md:container md:mx-auto pb-10 mt-10 px-20 w-full bg-[#FFD6BE] rounded-2xl ">
-                <form action="../SvCorregirTexto" method="POST">  
+                <form action="../SvTextoLeido" method="POST">  
                     <% 
                         Texto texto = (Texto) request.getSession().getAttribute("texto");
                     %>
@@ -51,6 +51,7 @@
 
                         int i = 0;
                         String mensajeAcerto = "";
+                        int cont = 0;
                         for (Pregunta pregunta : preguntas) {
                             if (respuestasDadasInt.get(i) == pregunta.getRespuestaCorrecta()) {
                                 mensajeAcerto = "Correcto";
@@ -89,6 +90,7 @@
                     <p><%=respuestaCorrecta%></p>
                     <%
                         if(mensajeAcerto == "Correcto"){
+                            cont++;
                     %>    
                         <p class="text-lime-500"><%=mensajeAcerto%></p>
                     <%}else{%>
@@ -96,7 +98,7 @@
 
                     <%}%>
                     <% i++; } %>
-                    <input hidden id="cantidadPreguntas" name="cantidadPreguntas" value="<%=i%>" type="text">
+                    <input hidden id="cantidadPreguntasCorrectas" name="cantidadPreguntasCorrectas" value="<%=cont%>" type="text">
                     <div class="mt-4">
                         <button type="submit" class="w-40 h-14 text-2xl  text-white bg-[#7A4A2F] hover:bg-[#3B1B09]  rounded-lg px-4 py-2">Enviar</button>
                     </div>

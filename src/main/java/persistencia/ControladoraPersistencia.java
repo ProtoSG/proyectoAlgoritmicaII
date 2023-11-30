@@ -17,6 +17,7 @@ public class ControladoraPersistencia {
     ProfesorJpaController profesorJPA = new ProfesorJpaController();
     TextoJpaController textoJPA = new TextoJpaController();
     UsuarioJpaController usuarioJPA = new UsuarioJpaController();
+    TextoLeidoJpaController textoLeidoJPA = new TextoLeidoJpaController();
     
     public void crearUsuario(Usuario usu){
         usuarioJPA.create(usu);

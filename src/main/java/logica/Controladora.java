@@ -63,6 +63,20 @@ public class Controladora {
         controlPersis.crearTexto(newTexto);
     }
     
+    public void agregarTextoLeido(Texto texto, int cantidadPreguntasCorrectas, Estudiante estudiante){
+        TextoLeido textoLeido = new TextoLeido();
+        textoLeido.setTexto(texto);
+        textoLeido.setRespuestasCorrectas(cantidadPreguntasCorrectas);
+        
+        Estudiante estud = estudiante;
+        textoLeido.setEstudiante(estud);
+        
+        estud.agregarTextoLeido(textoLeido);
+        
+        controlPersis.actualizarEstudiante(estud);
+        
+    }
+    
     public boolean comprobarIngreso(String userName, String contrasena){        
         List<Usuario> listUsuario = new ArrayList<Usuario>();
         listUsuario = controlPersis.getUsuarios();

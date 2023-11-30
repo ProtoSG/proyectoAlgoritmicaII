@@ -75,5 +75,37 @@ public class Grupo implements Serializable{
         this.listaEstudiantes = listaEstudiantes;
     }
     
+    public int cantidadTextosResueltos(){
+        int cont = 0;
+        for(Estudiante estudiante:listaEstudiantes){
+            cont += estudiante.getListaTextosLeidos().size();
+        }
+        return cont;
+    }
+    
+    public double preguntasCorrectasAlumno(){
+        double porcentajeTotal = 0.0;
+        for(Estudiante estudiante: listaEstudiantes){
+            porcentajeTotal += estudiante.preguntasCorrectasTotal();
+        }
+        
+        double promedio = ((double)porcentajeTotal / listaEstudiantes.size());
+        
+        return promedio;
+    }
+    
+    
+    public double preguntasCorrectasTextoAlmuno(){
+        double porcentajeTotal = 0.0;
+        for(Estudiante estudiante: listaEstudiantes){
+            porcentajeTotal += estudiante.promedioPreguntasCorrectasTexto();
+        }
+        
+        double promedio = ((double)porcentajeTotal / listaEstudiantes.size());
+        
+        return promedio;
+    }
+    
+    
     
 }
