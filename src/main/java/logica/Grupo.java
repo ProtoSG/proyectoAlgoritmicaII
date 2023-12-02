@@ -1,7 +1,9 @@
 package logica;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -85,27 +87,100 @@ public class Grupo implements Serializable{
     
     public double preguntasCorrectasAlumno(){
         double porcentajeTotal = 0.0;
+        double promedio = 0.0;
         for(Estudiante estudiante: listaEstudiantes){
             porcentajeTotal += estudiante.preguntasCorrectasTotal();
         }
-        
-        double promedio = ((double)porcentajeTotal / listaEstudiantes.size());
-        
+        if(porcentajeTotal!=0){
+        promedio = ((double)porcentajeTotal / listaEstudiantes.size());
+        }
         return promedio;
     }
     
     
     public double preguntasCorrectasTextoAlmuno(){
         double porcentajeTotal = 0.0;
+        double promedio = 0.0;
         for(Estudiante estudiante: listaEstudiantes){
             porcentajeTotal += estudiante.promedioPreguntasCorrectasTexto();
         }
         
-        double promedio = ((double)porcentajeTotal / listaEstudiantes.size());
-        
+        if(porcentajeTotal!=0){
+        promedio = ((double)porcentajeTotal / listaEstudiantes.size());
+        }
         return promedio;
     }
+
+    public int textoMasLeidos() {
+        if (listaEstudiantes.isEmpty()) {
+            return 0;
+        }
+
+        Map<Integer, Integer> conteoTextos = new HashMap<>();
+
+        for (Estudiante estudiante : listaEstudiantes) {
+            List<TextoLeido> textosLeidos = estudiante.getListaTextosLeidos();
+
+            for (TextoLeido textoLeido : textosLeidos) {
+                int idTexto = textoLeido.getTexto().getIdTexto();
+                conteoTextos.put(idTexto, conteoTextos.getOrDefault(idTexto, 0) + 1);
+            }
+        }
+
+        int maxVecesLeido = 0;
+        int idTextoMasLeido = 0;
+
+        for (Map.Entry<Integer, Integer> entry : conteoTextos.entrySet()) {
+            int idTexto = entry.getKey();
+            int vecesLeido = entry.getValue();
+
+            if (vecesLeido > maxVecesLeido) {
+                maxVecesLeido = vecesLeido;
+                idTextoMasLeido = idTexto;
+            }
+        }
+
+        return idTextoMasLeido;
+    }
     
+    public int textoMasResolver(boolean encontrarFacil) {
+        if (listaEstudiantes.isEmpty()) {
+            return 0;
+        }
+
+        double extremoPorcentaje = encontrarFacil ? 0.0 : 100.0;
+        int idTextoExtremo = 0;
+
+        for (Estudiante estudiante : listaEstudiantes) {
+            List<TextoLeido> textosLeidos = estudiante.getListaTextosLeidos();
+
+            for (TextoLeido textoLeido : textosLeidos) {
+                int idTexto = textoLeido.getTexto().getIdTexto();
+                int preguntasTotales = textoLeido.getTexto().getListaPreguntas().size();
+                int respuestasCorrectas = textoLeido.getRespuestasCorrectas();
+
+                if (preguntasTotales > 0) {
+                    double porcentajeTexto = ((double) respuestasCorrectas / preguntasTotales) * 100;
+
+                    if ((encontrarFacil && porcentajeTexto > extremoPorcentaje) ||
+                        (!encontrarFacil && porcentajeTexto < extremoPorcentaje)) {
+                        extremoPorcentaje = porcentajeTexto;
+                        idTextoExtremo = idTexto;
+                    }
+                }
+            }
+        }
+
+        return idTextoExtremo;
+    }
+
+    public int textoMasFacilesResolver() {
+        return textoMasResolver(true);
+    }
+
+    public int textoMasDificilesResolver() {
+        return textoMasResolver(false);
+    }
     
     
 }

@@ -15,10 +15,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+
 <%Controladora control = new Controladora();%>
 <html>
     <%@include file="../components/header.jsp"%>
     <body class="h-screen bg-[url('../assets/fondo.png')]">
+        <% HttpSession misession = request.getSession();
+        String usuario = (String) request.getSession().getAttribute("usuario");
+        
+        if(usuario == null){
+            response.sendRedirect("../index.jsp");
+        }
+    %>
         <%@include file="../components/navBar.jsp"%>
         <section class="py-8mt-10 flex items-center justify-center">
         <div class="max-w-screen-xl rounded-2xl py-10 mx-10 px-4 sm:px-6 lg:px-8 bg-[#FFD6BE] mt-10 flex gap-5">
@@ -27,12 +35,17 @@
                 </div>
                 <div class="w-2/3">
                     <div class="">
-                        <% String userName = (String) request.getSession().getAttribute("usuario");
+                        
+                        <% 
+                           if(usuario!=null){
+                           String userName = (String) request.getSession().getAttribute("usuario");
                            Usuario usuario1 = control.getUsuario(userName);
                            Estudiante estudiante = control.getEstudiante(usuario1.getIdUsuario());
                            Date dateParameter = estudiante.getFechaNacimiento();
                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                     
                            String fechaFormateada = sdf.format(dateParameter);
+                           
                         %>
                         <h2 class="text-2xl font-bold"><%=request.getSession().getAttribute("usuario")%></h2>
                         <p class="text-lg">Nombres: <span class="font-bold"><%=estudiante.getNombre()%></span></p>
@@ -117,5 +130,6 @@
             </div>
         </div>
     </section>
+                                <%}%>
     </body>
 </html>

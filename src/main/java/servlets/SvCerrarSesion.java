@@ -1,4 +1,3 @@
-
 package servlets;
 
 import java.io.IOException;
@@ -8,16 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Controladora;
+import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "SVUsuarios", urlPatterns = {"/SVUsuarios"})
-public class SVUsuarios extends HttpServlet {
-    
-    Controladora control = new Controladora();
-    
+
+@WebServlet(name = "SvCerrarSesion", urlPatterns = {"/SvCerrarSesion"})
+public class SvCerrarSesion extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         
+        HttpSession misession = request.getSession();
+        
+        misession.removeAttribute("usuario");
+        
+        response.sendRedirect("index.jsp");
     }
 
 
@@ -31,15 +35,8 @@ public class SVUsuarios extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nombreUsuraio = request.getParameter("nombreusu");
-        String contrasena = request.getParameter("contrasena");
-        String rol = request.getParameter("rol");
-        
-        control.crearUsuario( nombreUsuraio, contrasena, rol);
-        
-        response.sendRedirect("index.jsp");
+        processRequest(request, response);
     }
-
 
     @Override
     public String getServletInfo() {

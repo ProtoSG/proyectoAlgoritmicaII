@@ -2,6 +2,7 @@ package logica;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ public class Pregunta implements Serializable{
     @ElementCollection
     private List<String> alternativas;
     private int respuestaCorrecta;
+    @Column(length = 5000)
     private String razonamiento;
     
     @ManyToOne

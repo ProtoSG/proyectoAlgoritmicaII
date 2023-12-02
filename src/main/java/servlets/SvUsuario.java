@@ -23,8 +23,8 @@ import logica.Usuario;
  *
  * @author dgocr
  */
-@WebServlet(name = "SvEstudiante", urlPatterns = {"/SvEstudiante"})
-public class SvEstudiante extends HttpServlet {
+@WebServlet(name = "SvUsuario", urlPatterns = {"/SvUsuario"})
+public class SvUsuario extends HttpServlet {
     
     
     Controladora control = new Controladora();
@@ -49,6 +49,7 @@ public class SvEstudiante extends HttpServlet {
         String userName = request.getParameter("nombreUsuario");
         String contrasena = request.getParameter("contrasena");
         String alumno = request.getParameter("alumno");
+        String carreraProfesional = request.getParameter("carreraProfesional");
         
         String dateParameter = request.getParameter("date");
         Date date = null;
@@ -78,12 +79,10 @@ public class SvEstudiante extends HttpServlet {
                 control.crearEstudiante(usuario, name, lastName, date);
             }else{
                 usuario.setRol("profesor");
-                control.crearProfesor(usuario, name, lastName, date, "");
+                control.crearProfesor(usuario, name, lastName, date, carreraProfesional);
             }
         }
-        
-        
-        
+
         response.sendRedirect("index.jsp");
     }
 

@@ -7,6 +7,13 @@
 <html>
     <%@include file="../components/header.jsp"%>
     <body class="h-screen bg-[url('../assets/fondo.png')]">
+        <% HttpSession misession = request.getSession();
+        String usuario = (String) request.getSession().getAttribute("usuario");
+        
+        if(usuario == null){
+            response.sendRedirect("../index.jsp");
+        }
+    %>
         <%@include file="../components/navBar.jsp"%>
         <div class="flex items-center">
             <div class="md:container md:mx-auto pb-10 mt-10 px-20 w-full bg-[#FFD6BE] rounded-2xl ">

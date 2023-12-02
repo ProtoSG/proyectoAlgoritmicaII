@@ -9,13 +9,7 @@
 <nav class="bg-white border-gray-200 dark:bg-[#7A4A2F]">
     
     <!-- Validaxion Sesion-->
-    <% HttpSession misession = request.getSession();
-        String usuario = (String) request.getSession().getAttribute("usuario");
-        
-        if(usuario == null){
-            response.sendRedirect("../index.jsp");
-        }
-    %>
+    
     
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -37,7 +31,9 @@
                 <a href="../pages/estadisticaAlumnoPage.jsp" class="block text-xl py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-[#FFD6BE] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Estadísticas</a>
             </li>
             <li>
-                <a href="#" class="block text-xl py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-[#FFD6BE] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Salir</a>
+                <form action="../SvCerrarSesion">
+                    <button type="submit" class="block text-xl py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-[#FFD6BE] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Salir</button>
+                </form>
             </li>
             </ul>
         </div>

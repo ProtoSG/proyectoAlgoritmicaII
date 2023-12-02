@@ -182,6 +182,15 @@ body{
 .checkbox-group {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    
+}
+
+.checkbox-group label{
+    font-size: 1.5em;
+    color: #162938;
+    font-weight: 500;
 }
 
 input[type="checkbox"] {

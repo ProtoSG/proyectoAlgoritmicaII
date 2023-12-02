@@ -1,3 +1,4 @@
+<%@page import="logica.Estudiante"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.StringTokenizer"%>
@@ -9,6 +10,13 @@
 <html>
     <%@include file="../components/header.jsp"%>
     <body class="h-screen bg-[url('../assets/fondo.png')]">
+        <% HttpSession misession = request.getSession();
+        String usuario = (String) request.getSession().getAttribute("usuario");
+        
+        if(usuario == null){
+            response.sendRedirect("../index.jsp");
+        }
+    %>
         <%@include file="../components/navBar.jsp"%>
         <div class="flex items-center">
         <div class="md:container md:mx-auto pb-10 mt-10 px-20 w-full bg-[#FFD6BE] rounded-2xl ">
@@ -20,24 +28,32 @@
                         </svg>
                     </div>
                     <input type="search" id="searchInput" class="text-xl block w-full p-4 ps-10 text-sm text-[#7A4A2F] border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#7A4A2F] focus:border-[7A4A2F] dark:bg-[#FFD6BE] dark:border-gray-700 dark:placeholder-gray-900 dark:text-black dark:focus:ring-[#7A4A2F] dark:focus:border-[#7A4A2F]" placeholder="Buscar Texto..." required>
-                    <button type="submit" class="text-xl text-white absolute end-2.5 bottom-2.5 bg-[#7A4A2F] hover:bg-[#7A4A2F] focus:ring-4 focus:outline-none focus:ring-[#7A4A2F] font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#7A4A2F] dark:hover:bg-[#3B1B09] dark:focus:ring-blue-800">Search</button>
+                    
                 </div>
                 <div id="list">
-                <%
+                <% 
                     List<Texto> listaTextos = (List)request.getSession().getAttribute("listaTexto"); 
-                   
+                    Estudiante estudiante = (Estudiante)request.getSession().getAttribute("estudiante");
+ 
                     for(Texto texto:listaTextos){
-   
+                        boolean realizado = estudiante.textoRealizado(texto);
                         String textoLimirado = texto.limitarPalabras(50);
                 %>
                 <form action="../SvObtenerTexto" method="POST"> 
                 <input hidden name="id" value="<%=texto.getIdTexto()%>">
                 <div style="display: none" id="contenText" class="mt-10 border-solid border-2 border-black p-2 rounded-2xl">
                     <div class=" text-2xl">
-                        <p ><%=textoLimirado%> ...</p>
+                        <p><%=textoLimirado%> ...</p>
                     </div>
-                    <div class="mt-4">
-                        <button type="submit" class="w-40 h-14 text-2xl  text-white bg-[#7A4A2F] hover:bg-[#3B1B09]  rounded-lg px-4 py-2">Abrir</button>
+                    <div class="flex items-center justify-between">
+                        <div class="mt-4">
+                            <button type="submit" class="w-40 h-14 text-2xl  text-white bg-[#7A4A2F] hover:bg-[#3B1B09]  rounded-lg px-4 py-2">Abrir</button>
+                        </div>
+                        <%if(realizado){%>
+                            <div class="flex justify-center items-center w-40 h-14 text-2xl  text-black bg-lime-300 rounded-lg px-4 py-2">
+                                <p>Realizado</p>
+                            </div>
+                        <%}%>
                     </div>
                 </div>
                 </form>

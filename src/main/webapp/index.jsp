@@ -12,7 +12,7 @@
             </div>
             <div class="wrapper">
                 <div class="form-box login">
-                    <h2>Welcome !</h2>
+                    <h2>Iniciar Sesión</h2>
                     <form class="user" action="SvLogin" method="POST">
                         <div class="input-box">
                             <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
@@ -24,18 +24,16 @@
                             <input type="password" id="contrasena" name="contrasena" required>
                             <label>Password</label>
                         </div>
-                        <div class="forgot">
-                            <a href="#">Forgot Password</a>
-                        </div>
-                        <button type="submit" class="btn">Login</button>
+
+                        <button type="submit" class="btn">Iniciar Sesión</button>
                         <div class="login-register">
-                            <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                            <p>No tienes una cuenta? <a href="#" class="register-link">Register</a></p>
                         </div>
                     </form>
                 </div>
                 <div class="form-box register">
-                    <h2>Registration</h2>
-                    <form class="user" action="SvEstudiante" method="POST">
+                    <h2>Regístrate</h2>
+                    <form class="user" action="SvUsuario" method="POST">
                         <div class="input-box">
                             <span class="icon"><ion-icon name="reader-outline"></ion-icon></span>
                             <input type="text" id="name" name="name" required>
@@ -61,14 +59,25 @@
                             <input type="password" id="contrasena" name="contrasena" required>
                             <label>Password</label>
                         </div>
+                        <div id="carreraProfesional" class="input-box">
+                            <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                            <input type="text" id="carreraProfesional" name="carreraProfesional">
+                            <label>Carrera Profesional</label>
+                        </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="profesor" name="profesor" checked onclick="updateCheckboxes(this)"> <label for="profesor">Profesor</label>
-                            <input type="checkbox" id="alumno" name="alumno" onclick="updateCheckboxes(this)"> <label for="alumno">Alumno</label>
+                            <div>
+                            <input type="checkbox" id="profesor" name="profesor" checked onclick="uncheck()">
+                            <label for="profesor">Profesor</label>
+                            </div>
+                            <div>
+                            <input type="checkbox" id="alumno" name="alumno" onclick="uncheck()">
+                            <label for="alumno">Alumno</label>
+                            </div>
                         </div>
  
                         <button type="submit" class="btn">Register</button>
                         <div class="login-register">
-                            <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                            <p>Ya tienes una cuenta? <a href="#" class="login-link">Login</a></p>
                         </div>
                     </form>
           

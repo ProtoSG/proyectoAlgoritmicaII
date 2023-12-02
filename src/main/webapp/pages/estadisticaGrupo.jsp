@@ -4,10 +4,17 @@
 <!DOCTYPE html>
 <html>
         
-    <%Grupo grupo = (Grupo)request.getSession().getAttribute("grupo"); %>
-    
     <%@include file="../components/header.jsp"%>
     <body class="h-screen bg-[url('../assets/fondo.png')]">
+        <% HttpSession misession = request.getSession();
+        String usuario = (String) request.getSession().getAttribute("usuario");
+        
+        if(usuario == null){
+            response.sendRedirect("../index.jsp");
+        }
+    %>
+    <%Grupo grupo = (Grupo)request.getSession().getAttribute("grupo"); %>
+    
         <%@include file="../components/navBarProfesor.jsp"%>
         <section class="py-8mt-10 flex items-center justify-center">
         <div class="max-w-screen-xl rounded-2xl py-10 mx-10 px-4 sm:px-6 lg:px-8 bg-[#FFD6BE] mt-10">
@@ -62,7 +69,7 @@
                                     Textos más leídos
                                 </dt>
                                 <dd class="mt-1 text-3xl font-semibold text-gray-700">
-                                    
+                                    <%=grupo.textoMasLeidos()%>
                                 </dd>
                             </dl>
                         </div>
@@ -74,7 +81,7 @@
                                     Textos más fáciles de resolver por sus alumnos
                                 </dt>
                                 <dd class="mt-1 text-3xl font-semibold text-gray-700">
-                                    
+                                    <%=grupo.textoMasFacilesResolver()%>
                                 </dd>
                             </dl>
                         </div>

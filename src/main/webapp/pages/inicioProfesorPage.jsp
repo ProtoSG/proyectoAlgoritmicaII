@@ -9,6 +9,13 @@
 <html>
     <%@include file="../components/header.jsp"%>
     <body class="h-screen bg-[url('../assets/fondo.png')]">
+        <% HttpSession misession = request.getSession();
+        String usuario = (String) request.getSession().getAttribute("usuario");
+        
+        if(usuario == null){
+            response.sendRedirect("../index.jsp");
+        }
+    %>
         <%@include file="../components/navBarProfesor.jsp"%>
                 <section class="py-8mt-10 flex items-center justify-center">
         <div class="max-w-screen-xl rounded-2xl py-10 mx-10 px-4 sm:px-6 lg:px-8 bg-[#FFD6BE] mt-10 flex gap-5">
@@ -67,7 +74,7 @@
                     </div>
                 </div>
                 <div class="mt-5 flex justify-center">
-                    <a href="nuevoGrupoPage.jsp" class=" h-14 text-2xl  text-white bg-[#7A4A2F] hover:bg-[#3B1B09]  rounded-lg px-4 py-2">Crear nuevo grupo</a>
+                    <a href="crearGrupo.jsp" class=" h-14 text-2xl  text-white bg-[#7A4A2F] hover:bg-[#3B1B09]  rounded-lg px-4 py-2">Crear nuevo grupo</a>
                 </div>
             </div>
         </section>

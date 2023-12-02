@@ -31,122 +31,7 @@ public class Estudiante extends Persona implements Serializable{
 
     public Estudiante(List<TextoLeido> listaTextosLeidos, Usuario usuario, Grupo grupo, int id, String nombre, String apellido, Date fechaNacimiento) {
         super(id, nombre, apellido, fechaNacimiento);
-        this.listaTextosLeidos = new List() {
-            @Override
-            public int size() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean isEmpty() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public Iterator iterator() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public Object[] toArray() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public Object[] toArray(Object[] a) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean add(Object e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean containsAll(Collection c) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean addAll(Collection c) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean addAll(int index, Collection c) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean removeAll(Collection c) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean retainAll(Collection c) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void clear() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public Object get(int index) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public Object set(int index, Object element) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void add(int index, Object element) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public Object remove(int index) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public int indexOf(Object o) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public int lastIndexOf(Object o) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public ListIterator listIterator() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public ListIterator listIterator(int index) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public List subList(int fromIndex, int toIndex) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        };
+        this.listaTextosLeidos = listaTextosLeidos;
         this.usuario = usuario;
         this.grupo = grupo;
     }
@@ -205,23 +90,27 @@ public class Estudiante extends Persona implements Serializable{
         return resultadoFormateado;
     }
     
-    public double promedioPreguntasCorrectasTexto(){
-        int preguntasTotales = 0;
-        int respuestasCorrectas = 0;
-        double porcentajeTexto = 0.0;
+    
+    public double promedioPreguntasCorrectasTexto() {
+        if (listaTextosLeidos.isEmpty()) {
+            return 0.0;
+        }
+
+        double porcentajeTotal = 0.0;
 
         for (TextoLeido textoLeido : listaTextosLeidos) {
-            preguntasTotales = textoLeido.getTexto().getListaPreguntas().size();
-            respuestasCorrectas = textoLeido.getRespuestasCorrectas();
-            porcentajeTexto += ((double) respuestasCorrectas/preguntasTotales) * 100;
+            int preguntasTotales = textoLeido.getTexto().getListaPreguntas().size();
+            int respuestasCorrectas = textoLeido.getRespuestasCorrectas();
+
+            if (preguntasTotales > 0) {
+                double porcentajeTexto = ((double) respuestasCorrectas / preguntasTotales) * 100;
+                porcentajeTotal += porcentajeTexto;
+            }
         }
-        
-        double porcentajePromedio = ((Double) porcentajeTexto/listaTextosLeidos.size());
-        
+
+        double porcentajePromedio = porcentajeTotal / listaTextosLeidos.size();
         DecimalFormat df = new DecimalFormat("#.##");
-        double resultadoFormateado = Double.parseDouble(df.format(porcentajePromedio));
-        
-        return resultadoFormateado;
+        return Double.parseDouble(df.format(porcentajePromedio));
     }
     
     public double textosFalloTodo(){
@@ -268,5 +157,16 @@ public class Estudiante extends Persona implements Serializable{
         double resultadoFormateado = Double.parseDouble(df.format(porcentajeTextosAcertados));
         
         return resultadoFormateado;
+    }
+    
+    
+    public boolean textoRealizado(Texto texto){
+        boolean realizado = false;
+        for(TextoLeido textoLeido : listaTextosLeidos){
+            if(texto.getIdTexto() == textoLeido.getTexto().getIdTexto()){
+                realizado = true;
+            }
+        }
+        return realizado;
     }
 }
